@@ -17,10 +17,7 @@ export class ClienteController {
     return this.clienteService.findAll();
   }
 
-  @Get(':id')
-  findOne(@Param('id') id: number) {
-    return this.clienteService.findOne(+id);
-  }
+ 
 
   
 }

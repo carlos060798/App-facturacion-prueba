@@ -1,5 +1,5 @@
 
-import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString ,MinLength} from 'class-validator';
 
 export class CreateClienteDto {
   @IsNotEmpty()
@@ -12,6 +12,7 @@ export class CreateClienteDto {
 
   @IsNotEmpty()
   @IsString()
+  @MinLength(9)
   numeroIdentificacion: string;
 
   @IsOptional()

@@ -1,6 +1,6 @@
 export interface  Cliente {
-    id: string;
-    nombre: string;
+    id?: string;
+    nombreCliente: string;
     tipoIdentificacion: string;
     numeroIdentificacion: string;
     observaciones: string;
