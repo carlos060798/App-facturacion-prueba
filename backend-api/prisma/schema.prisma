@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql" // Cambia esto a "sqlserver" si usas SQL Server
+  url      = env("DATABASE_URL")
+}
+
+model Cliente {
+  id                Int      @id @default(autoincrement())
+  nombreCliente     String
+  tipoIdentificacion String
+  numeroIdentificacion String
+  observaciones     String?
+  facturas          Factura[]  // Relación uno a muchos con Factura
+}
+
+model Factura {
+  id            Int      @id @default(autoincrement())
+  idCliente     Int
+  fecha         DateTime
+  nombreProducto String
+  precio        Float
+  valorDescuento Float
+  iva           Float
+  valorTotal    Float
+  cliente       Cliente   @relation(fields: [idCliente], references: [id]) // Relación con Cliente
+}
