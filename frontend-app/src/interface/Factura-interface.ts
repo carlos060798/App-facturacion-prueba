@@ -1,10 +1,10 @@
 export interface Factura {
-    id: string;
-    idCliente: string;
-    fecha: string;
-    nombreProducto: string;
-    precio: number;
-    valorDescuento: number;
-    iva: number;
-    valorTotal: number;
-  }
+  id?: number;
+  fecha: Date;
+  nombreProducto: string;
+  precio: number;
+  descuento: number;
+  idCliente: number;
+  total: number;
+  valorDescuento: number;
+}

@@ -6,19 +6,21 @@ CREATE TABLE `Cliente` (
     `numeroIdentificacion` VARCHAR(191) NOT NULL,
     `observaciones` VARCHAR(191) NULL,
 
+    UNIQUE INDEX `Cliente_nombreCliente_key`(`nombreCliente`),
+    UNIQUE INDEX `Cliente_numeroIdentificacion_key`(`numeroIdentificacion`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- CreateTable
 CREATE TABLE `Factura` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
-    `idCliente` INTEGER NOT NULL,
     `fecha` DATETIME(3) NOT NULL,
     `nombreProducto` VARCHAR(191) NOT NULL,
     `precio` DOUBLE NOT NULL,
+    `descuento` DOUBLE NOT NULL,
+    `idCliente` INTEGER NOT NULL,
+    `total` DOUBLE NOT NULL,
     `valorDescuento` DOUBLE NOT NULL,
-    `iva` DOUBLE NOT NULL,
-    `valorTotal` DOUBLE NOT NULL,
 
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;

@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body,Query } from '@nestjs/common';
 import { FacturaService } from './factura.service';
 import { CreateFacturaDto } from './dto/create-factura.dto';
 
@@ -13,14 +13,14 @@ export class FacturaController {
   }
 
   @Get()
-  findAll() {
-    return this.facturaService.findAll();
+  async getInvoices(
+    @Query('from') from: string,
+    @Query('to') to: string,
+    @Query('idCliente') idCliente: number,
+    @Query('page') page: number = 1,
+    @Query('limit') limit: number = 10
+  ) {
+    return await this.facturaService.getInvoices({ from, to, idCliente, page, limit });
   }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.facturaService.findOne(+id);
-  }
-
 
 }

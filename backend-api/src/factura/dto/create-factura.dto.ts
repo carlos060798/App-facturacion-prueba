@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString, IsDateString } from 'class-validator';
+import { IsNotEmpty, IsNumber, IsString, IsDate } from 'class-validator';
 
 export class CreateFacturaDto {
   @IsNotEmpty()
@@ -6,8 +6,8 @@ export class CreateFacturaDto {
   idCliente: number;
 
   @IsNotEmpty()
-  @IsDateString()
-  fecha: string;
+  @IsDate()
+  fecha: Date;
 
   @IsNotEmpty()
   @IsString()
@@ -19,13 +19,13 @@ export class CreateFacturaDto {
 
   @IsNotEmpty()
   @IsNumber()
+  descuento: number;
+
+  @IsNotEmpty()
+  @IsNumber()
+  total: number;
+
+  @IsNotEmpty()
+  @IsNumber()
   valorDescuento: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  iva: number;
-
-  @IsNotEmpty()
-  @IsNumber()
-  valorTotal: number;
 }
