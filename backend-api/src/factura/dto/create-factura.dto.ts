@@ -1,5 +1,8 @@
 import { IsNotEmpty, IsNumber, IsString, IsDate } from 'class-validator';
 
+/**
+ * Represents the data transfer object for creating a factura.
+ */
 export class CreateFacturaDto {
   @IsNotEmpty()
   @IsNumber()

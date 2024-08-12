@@ -74,7 +74,7 @@ function ClientesForm() {
                         placeholder="Escribe observaciones"
                     ></textarea>
                 </div>
-                <button type="submit" className="bg-slate-500 text-white px-4 py-2 rounded">
+                <button type="submit" className="w-full p-3 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors">
                     Guardar cliente
                 </button>
             </form>

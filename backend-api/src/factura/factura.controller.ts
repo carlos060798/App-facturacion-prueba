@@ -3,6 +3,9 @@ import { FacturaService } from './factura.service';
 import { CreateFacturaDto } from './dto/create-factura.dto';
 
 
+/**
+ * FacturaController class handles the routes and requests related to invoices.
+ */
 @Controller('factura')
 export class FacturaController {
   constructor(private readonly facturaService: FacturaService) {}

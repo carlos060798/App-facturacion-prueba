@@ -1,6 +1,9 @@
 
 import { IsNotEmpty, IsOptional, IsString ,MinLength} from 'class-validator';
 
+/**
+ * Represents the data transfer object for creating a cliente.
+ */
 export class CreateClienteDto {
   @IsNotEmpty()
   @IsString()

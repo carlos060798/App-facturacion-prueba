@@ -1,9 +1,31 @@
-import { useState,useEffect} from 'react';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useState, useEffect } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import LoadingSpinner from './Loading'; // Asegúrate de tener un componente de carga
 
-const fetchFacturas = async (page, limit, from, to, idCliente) => {
+interface Factura {
+  id: number;
+  idCliente: number;
+  fecha: string;
+  nombreProducto: string;
+  precio: number;
+  valorDescuento: number;
+  iva: number;
+  total: number;
+}
+
+interface FacturasResponse {
+  data: Factura[];
+  count: number;
+}
+
+const fetchFacturas = async (
+  page: number,
+  limit: number,
+  from: string,
+  to: string,
+  idCliente: string
+): Promise<FacturasResponse> => {
   const response = await axios.get('http://localhost:3000/api/factura', {
     params: { from, to, idCliente, page, limit },
   });
@@ -11,34 +33,29 @@ const fetchFacturas = async (page, limit, from, to, idCliente) => {
 };
 
 function FacturasTable() {
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(10);
-  const [from, setFrom] = useState('');
-  const [to, setTo] = useState('');
-  const [idCliente, setIdCliente] = useState('');
+  const [page, setPage] = useState<number>(1);
+  const [limit, setLimit] = useState<number>(10);
+  const [from, setFrom] = useState<string>('');
+  const [to, setTo] = useState<string>('');
+  const [idCliente, setIdCliente] = useState<string>('');
 
-  // Obtén el cliente de consulta
-  const queryClient = useQueryClient();
 
-  // Consulta para obtener las facturas
-  const { data, isLoading, isError, refetch } = useQuery({
+  const { data, isLoading, isError, refetch } = useQuery<FacturasResponse>({
     queryKey: ['facturas', page, limit, from, to, idCliente],
     queryFn: () => fetchFacturas(page, limit, from, to, idCliente),
     enabled: false, // No ejecutar la consulta automáticamente
   });
 
-  // Handler para aplicar los filtros
   const handleFilterChange = () => {
     refetch(); // Disparar la consulta manualmente
   };
 
-  const handlePageChange = (newPage) => {
+  const handlePageChange = (newPage: number) => {
     if (newPage > 0) {
       setPage(newPage);
     }
   };
 
-  // Opcional: para que la página se reinicie cuando cambie el límite
   useEffect(() => {
     setPage(1);
   }, [limit]);
@@ -91,14 +108,14 @@ function FacturasTable() {
       </div>
       <button
         onClick={handleFilterChange}
-        className="px-4 py-2 bg-indigo-600 text-white rounded-lg"
+        className="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors"
       >
         Aplicar Filtros
       </button>
 
       <div className="overflow-x-auto mt-4">
         <table className="min-w-full bg-white shadow-md rounded-lg overflow-hidden">
-          <thead className="bg-indigo-600 text-white">
+          <thead className='bg-purple-600 text-white rounded-md hover:bg-purple-700 transition-colors'>
             <tr>
               <th className="py-3 px-4 text-left">ID Cliente</th>
               <th className="py-3 px-4 text-left">Fecha</th>

@@ -9,6 +9,14 @@ export class FacturaService {
 
   constructor(private prisma: PrismaService) {}
 
+  /**
+   * Creates a new factura.
+   *
+   * @param createFacturaDto - The data for creating the factura.
+   * @returns The created factura.
+   * @throws BadRequestException if a factura with the same data already exists.
+   * @throws InternalServerErrorException if there is an error creating the factura.
+   */
   async create(createFacturaDto: CreateFacturaDto) {
     try {
       const factura = await this.prisma.factura.create({
@@ -25,6 +33,17 @@ export class FacturaService {
   }
 
  
+  /**
+   * Retrieves a list of invoices based on the provided filters.
+   *
+   * @param from - The start date of the invoice range.
+   * @param to - The end date of the invoice range.
+   * @param idCliente - The ID of the client.
+   * @param page - The page number of the results.
+   * @param limit - The maximum number of invoices to retrieve per page.
+   * @returns An object containing the retrieved invoices, total count, current page, and limit.
+   * @throws If there is an error fetching the invoices.
+   */
   async getInvoices({ from, to, idCliente, page, limit }: { from: string, to: string, idCliente: number, page: number, limit: number }) {
     const skip = (page - 1) * limit;
 
